@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Compose 应用只需要一个「无 ActionBar」的宿主主题，界面全部由 Compose 画。
+      用系统 Material 而不是 material3 的 XML 主题，可以少引一个
+      com.google.android.material 依赖（省 1.5MB 左右）。
+
+      状态栏 / 导航栏颜色不要在这里写死：Activity 里的 enableEdgeToEdge()
+      会按系统深浅色自动处理；两边都设会打架，表现为「深色模式下状态栏图标看不见」。
+    -->
+    <style name="Theme.App" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>

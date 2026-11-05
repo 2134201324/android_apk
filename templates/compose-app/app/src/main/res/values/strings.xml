@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 生成工程时由 init-project.sh 自动替换为真实应用名（桌面图标下方显示的文字） -->
+    <string name="app_name">__APP_NAME__</string>
+</resources>

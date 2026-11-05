@@ -1,0 +1,18 @@
+# 这个技能会生成签名密钥，绝不允许入库
+signing/
+*.keystore
+*.jks
+keystore.properties
+
+# 构建产物与本机路径
+build/
+.gradle/
+dist/
+local.properties
+*.apk
+*.idsig
+.idea/
+*.iml
+.DS_Store
+__pycache__/
+*.pyc

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B0F14">
+<title>App</title>
+<!--
+  ============================================================
+  这里是你的应用。整站就放这个目录（app/src/main/assets/）下：
+    index.html          入口
+    app.js / style.css  按需拆分
+    img/ audio/         静态资源，引用写相对路径即可
+  页面通过 https://appassets.androidplatform.net/assets/ 加载，
+  所以 fetch('./data.json')、localStorage、Web Worker 全部正常。
+  不要写 file:// 绝对路径，也不要用 CDN（离线打开会白屏）。
+  ============================================================
+-->
+<style>
+  :root{
+    --bg:#0B0F14; --card:#151B23; --line:#222C38;
+    --fg:#E6EAF0; --dim:#8B98A9; --accent:#4F8CFF;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+  body{display:flex;align-items:center;justify-content:center;
+    padding:calc(24px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom))}
+  .card{width:100%;max-width:360px;background:var(--card);border:1px solid var(--line);
+    border-radius:18px;padding:26px 22px}
+  .dot{width:34px;height:34px;border-radius:10px;background:linear-gradient(145deg,#4F8CFF,#2F5FD0);
+    margin-bottom:18px}
+  h1{font-size:19px;font-weight:650;margin:0 0 6px;letter-spacing:-.01em}
+  p.sub{color:var(--dim);font-size:13px;margin:0 0 22px}
+  .row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;
+    border-top:1px solid var(--line);font-size:13px}
+  .row span:first-child{color:var(--dim)}
+  .row span:last-child{font-variant-numeric:tabular-nums;text-align:right;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60%}
+  button{width:100%;margin-top:22px;padding:13px;border:0;border-radius:12px;
+    background:var(--accent);color:#fff;font-size:15px;font-weight:600;
+    font-family:inherit;transition:transform .12s,opacity .12s}
+  button:active{transform:scale(.97);opacity:.9}
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="dot"></div>
+    <h1 id="title">应用已就绪</h1>
+    <p class="sub">如果你看到这张卡片，说明 WebView 资源通道、JS 执行、本地存储都正常。</p>
+
+    <div class="row"><span>运行环境</span><span id="ua">—</span></div>
+    <div class="row"><span>屏幕</span><span id="screen">—</span></div>
+    <div class="row"><span>本地存储</span><span id="storage">—</span></div>
+    <div class="row"><span>点击次数</span><span id="count">0</span></div>
+
+    <button id="tap">点一下验证交互</button>
+  </main>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  $('ua').textContent = navigator.userAgent.includes('wv') ? 'Android WebView' : navigator.platform;
+  $('screen').textContent = `${innerWidth}×${innerHeight} @${devicePixelRatio}x`;
+
+  // localStorage 在 https 假域名下可用；如果这里显示“不可用”，
+  // 说明页面被改回了 file:// 加载方式。
+  let n = 0;
+  try {
+    n = Number(localStorage.getItem('tapCount') || 0);
+    $('storage').textContent = '正常';
+  } catch (e) {
+    $('storage').textContent = '不可用';
+  }
+  $('count').textContent = n;
+
+  $('tap').addEventListener('click', () => {
+    n += 1;
+    $('count').textContent = n;
+    try { localStorage.setItem('tapCount', String(n)); } catch (e) {}
+    if (navigator.vibrate) navigator.vibrate(8);
+  });
+</script>
+</body>
+</html>

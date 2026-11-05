@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Adaptive icon 前景层：108x108 画布，中心 72x72 是安全区，
+  内容必须落在半径约 33 的圆内，否则会被各厂商的圆角/圆形遮罩切掉。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 六边形 -->
+    <path
+        android:pathData="M54,24 L80,39 L80,69 L54,84 L28,69 L28,39 Z"
+        android:strokeColor="#F5F7FA"
+        android:strokeWidth="4"
+        android:strokeLineJoin="round"
+        android:fillColor="@android:color/transparent" />
+
+    <!-- 内三角 -->
+    <path
+        android:pathData="M54,43 L67,66 L41,66 Z"
+        android:strokeColor="#F5F7FA"
+        android:strokeWidth="4"
+        android:strokeLineJoin="round"
+        android:fillColor="@android:color/transparent" />
+</vector>
